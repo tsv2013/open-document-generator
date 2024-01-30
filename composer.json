@@ -1,0 +1,30 @@
+{
+    "name": "tsv2013/open-office-generator",
+    "type": "library",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "OpenOfficeGenerator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OpenOfficeGenerator\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "tsv2013",
+            "email": "tsv2013@noreply.github.com"
+        }
+    ],
+    "scripts": {
+        "test": "phpunit"
+    },
+    "require": {}
+}
