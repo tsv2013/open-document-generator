@@ -9,10 +9,10 @@
   - tables of content
 
 ## Sample usage
-  '''PHP
+  ```PHP
   $document = new ODTDocument();
   Sdocument->create();
-  '''
+  ```
 
 ## See also
   https://getcomposer.org/doc/articles/scripts.md
