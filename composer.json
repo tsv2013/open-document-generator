@@ -24,7 +24,8 @@
         }
     ],
     "scripts": {
-        "test": "phpunit tests"
+        "test": "phpunit tests",
+        "testsVerbose": "@tests -vvv"
     },
     "require": {}
 }
