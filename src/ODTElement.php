@@ -5,19 +5,24 @@ namespace OpenOfficeGenerator;
 class ODTElement {
   protected $namespase = "";
   protected $name = "";
-  public $attributes = "";
+  protected $attributes = "";
+  public $style_name;
   public $styles = [];
   protected $content = [];
-  function __construct($namespase, $name) {
+  function __construct($namespase, $name, $style_name = null) {
     $this->namespase = $namespase;
     $this->name = $name;
+    $this->style_name = $style_name;
   }
   protected function get_content() {
     foreach ($this->content as $content_item) {
       yield from $content_item->create();
     }
   }
+  protected function update_attributes() {
+  }
   public function create() {
+    $this->update_attributes();
     yield "<{$this->namespase}:{$this->name} {$this->attributes}>";
     yield from $this->get_content();
     yield "</{$this->namespase}:{$this->name}>";
@@ -37,15 +42,14 @@ class ODTElement {
 }
 
 class ODTPara extends ODTElement {
-  public $style_name;
   public $text = "";
   function __construct($style_name, $text) {
-    parent::__construct("text", "p");
-    $this->style_name = $style_name;
+    parent::__construct("text", "p", $style_name);
     $this->text = $text;
     $this->attributes = "text:style-name=\"$style_name\"";
   }
   protected function get_content() {
-    yield "<text:span text:style-name=\"$this->style_name\">$this->text</text:span>";
+    yield $this->text;
+    // yield "<text:span text:style-name=\"$this->style_name\">$this->text</text:span>";
   }
 }

@@ -1,11 +1,13 @@
 <?php
 
+namespace OpenOfficeGenerator;
+
 class ODTFile extends ZipArchive {
   private $files;
   protected $content;
   public $path;
 
-  public function __construct($filename, $template_path = '/templates/default/' ){
+  public function __construct($filename, $template_path = '/../cl_templates/document/' ){
     $this->path = dirname(__FILE__) . $template_path;
     if ($this->open($filename, ZIPARCHIVE::CREATE) !== TRUE) {
       die("Unable to open <$filename>\n");
@@ -13,24 +15,26 @@ class ODTFile extends ZipArchive {
     $this->files = array(
       "META-INF/manifest.xml",
       "styles.xml",
-      "content.xml",
-      "mimetype" );
+      "mimetype"
+    );
 
     foreach($this->files as $f) {
-      $this->addFile($this->path . $f , $f);
+      $this->addFile($this->path.$f, $f);
     }
   }
 
   public function create_from_content($content) {
-    // $this->addFromString("word/document.xml", str_replace( '{CONTENT}', $this->content, file_get_contents($this->path . "word/document.xml")));
+    // $this->addFromString("word/document.xml", str_replace( '{CONTENT}', $this->content, file_get_contents( $this->path . "word/document.xml" ) ) );
     $this->addFromString("content.xml", $content);
     $this->close();
   }
   public function create_from_file($filename) {
-    $this->create_from_content(file_get_contents($filename));
+    // $this->create_from_content(file_get_contents($filename));
+    $this->addFile($filename, "content.xml");
+    $this->close();
   }
   public function create_from_document($document) {
-    $tmpfname = tempnam(dirname(__FILE__) . "/../temp/", "doc_");
+    $tmpfname = tempnam(dirname(__FILE__) . "/../temp/cl/", "doc_cl_");
     $handle = fopen($tmpfname, "w");
     foreach($document->create() as $doc_str) {
       fwrite($handle, $doc_str);
