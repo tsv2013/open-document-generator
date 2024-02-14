@@ -48,7 +48,19 @@ class ODTStyleCellProperties extends ODTProperties {
     $this->properties["fo:border-left"] = "none";
     $this->properties["fo:border-right"] = "none";
     $this->properties["fo:border-top"] = "none";
-    $this->properties["fo:border-bottom"] = "0.002cm solid #000000";
+    $this->properties["fo:border-bottom"] = "none";
+  }
+}
+class ODTStyleColumnProperties extends ODTProperties {
+  function __construct() {
+    parent::__construct("style", "table-column-properties");
+    $this->properties["style:column-width"] = "17cm";
+    $this->properties["style:rel-column-width"] = "16383*";
+  }
+  public function set_width($width) {
+    $this->properties["style:column-width"] = $width."cm";
+    $percent =  round(566 * $width);
+    $this->properties["style:rel-column-width"] = $percent."*";
   }
 }
 class ODTStyle extends ODTElement {
@@ -59,6 +71,19 @@ class ODTStyle extends ODTElement {
     $this->style_family = $style_family;
     $this->attributes = "style:name=\"$style_name\" style:family=\"$style_family\" style:parent-style-name=\"$parent_style\"";
     // $this->properties = "<style:text-properties fo:font-size=\"11.00pt\" fo:font-weight=\"bold\" fo:font-family=\"Arial\" style:font-family-asian=\"Arial\" style:font-family-complex=\"Arial\" fo:background-color=\"transparent\" style:use-window-font-color=\"true\" />";
+    switch ($style_family) {
+      case "paragraph":
+        $this->add(new ODTStyleParagraphProperties());
+      case "text":
+        $this->add(new ODTStyleTextProperties());
+        break;
+      case "table-cell":
+        $this->add(new ODTStyleCellProperties());
+        break;
+      case "table-column":
+        $this->add(new ODTStyleColumnProperties());
+        break;
+      }
   }
   protected function get_content() {
     if(isset($this->properties) && strlen($this->properties) > 0) {
@@ -66,5 +91,12 @@ class ODTStyle extends ODTElement {
     } else {
       yield from parent::get_content();
     }
+  }
+  public function get_style_properties($style_family = null) {
+    if(!isset($style_family)) {
+      $style_family = $this->style_family;
+    }
+    // TODO: find properties by name (namespace:name)
+    return $this->content[0];
   }
 }

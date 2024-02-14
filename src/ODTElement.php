@@ -21,13 +21,19 @@ class ODTElement {
   }
   protected function update_attributes() {
   }
-  public function create() {
-    $this->update_attributes();
+  public function create_head() {
     yield "<{$this->namespase}:{$this->name} {$this->attributes}>";
-    yield from $this->get_content();
+  }
+  public function create_tail() {
     yield "</{$this->namespase}:{$this->name}>";
   }
-  public function create_style($style_name, $parent_style = "Standard", $style_family = "text", $properties = "") {
+  public function create() {
+    $this->update_attributes();
+    yield from $this->create_head();
+    yield from $this->get_content();
+    yield from $this->create_tail();
+  }
+  public function create_style($style_name, $style_family = "text", $parent_style = "Standard", $properties = "") {
     $style = new ODTStyle($style_name, $parent_style, $style_family);
     if(strlen($properties) > 0) {
       $style->properties = $properties;

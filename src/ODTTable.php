@@ -8,20 +8,21 @@ class ODTTable extends ODTElement {
   public $columns = [];
   public $header_rows = [];
   public $col_count;
-  function __construct($col_count = 1) {
+  function __construct($column_defs = 1) {
     parent::__construct("table", "table");
     $this->unique_id = ODTTable::$next_unique_id++;
 
     $this->style_name = "Table$this->unique_id";
     $table_width = 17;
-    $this->create_style($this->style_name, "Standard", "table", "<style:table-properties style:width=\"".$table_width."cm\" table:align=\"margins\"/>");
+    $this->create_style($this->style_name, "table", "Standard", "<style:table-properties style:width=\"".$table_width."cm\" table:align=\"margins\"/>");
     $column_style_name = $this->style_name . "Column";
 
-    $this->col_count = $col_count;
-    $column_width = round($table_width / $col_count, 3);
-    for ($i = 1; $i <= $col_count; $i++) {
-      $column_style = $this->create_style($column_style_name.$i, "Standard", "table-column", "<style:table-column-properties style:column-width=\"" . $column_width . "cm\" style:rel-column-width=\"16383*\"/>");
+    $this->col_count = is_array($column_defs) ? count($column_defs) : $column_defs;
+    for ($i = 0; $i < $this->col_count; $i++) {
+      $column_style = $this->create_style($column_style_name.$i, "table-column");
       $column = new ODTTableColumn($column_style);
+      $column_width = is_array($column_defs) ? $column_defs[$i] : round($table_width / $column_defs, 3);
+      $column_style->get_style_properties()->set_width($column_width);
       array_push($this->columns, $column);
     }
 

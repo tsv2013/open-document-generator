@@ -36,7 +36,9 @@ class ODTDocument extends ODTElement {
                           xmlns:textooo=\"http://openoffice.org/2013/office\"
                           xmlns:field=\"urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0\" office:version=\"1.2\"";
   }
-  protected function get_content() {
+  public function create_head() {
+    yield "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+    yield from parent::create_head();
     yield "<office:font-face-decls>
               <style:font-face style:name=\"Arial2\" svg:font-family=\"Arial\" style:font-family-generic=\"swiss\"/>
               <style:font-face style:name=\"Times New Roman\" svg:font-family=\"&apos;Times New Roman&apos;\" style:font-family-generic=\"roman\" style:font-pitch=\"variable\"/>
@@ -50,12 +52,10 @@ class ODTDocument extends ODTElement {
       yield from $style_item->create();
     }
     yield "</office:automatic-styles><office:body><office:text text:use-soft-page-breaks=\"true\">";
-    yield from parent::get_content();
-    yield "</office:text></office:body>";
   }
-  public function create() {
-    yield "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-    yield from parent::create();
+  public function create_tail() {
+    yield "</office:text></office:body>";
+    yield from parent::create_tail();
   }
   public function add_heading($text, $level = 1) {
     $heading = new ODTPara("Heading $level", $text);
