@@ -36,9 +36,9 @@ class ODTDocument extends ODTElement {
                           xmlns:textooo=\"http://openoffice.org/2013/office\"
                           xmlns:field=\"urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0\" office:version=\"1.2\"";
   }
-  public function create_head() {
+  public function get_head() {
     yield "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-    yield from parent::create_head();
+    yield from parent::get_head(false);
     yield "<office:font-face-decls>
               <style:font-face style:name=\"Arial2\" svg:font-family=\"Arial\" style:font-family-generic=\"swiss\"/>
               <style:font-face style:name=\"Times New Roman\" svg:font-family=\"&apos;Times New Roman&apos;\" style:font-family-generic=\"roman\" style:font-pitch=\"variable\"/>
@@ -53,18 +53,22 @@ class ODTDocument extends ODTElement {
     }
     yield "</office:automatic-styles><office:body><office:text text:use-soft-page-breaks=\"true\">";
   }
-  public function create_tail() {
+  public function get_tail() {
     yield "</office:text></office:body>";
-    yield from parent::create_tail();
+    yield from parent::get_tail();
   }
-  public function add_heading($text, $level = 1) {
-    $heading = new ODTPara("Heading $level", $text);
-    $this->add($heading);
-    return $heading;
-  }
-  public function add_para($text, $style = "Standard") {
-    $para = new ODTPara($style, $text);
+  public function add_para($text, $style_name = "Standard") {
+    $para = new ODTPara($style_name, $text);
     $this->add($para);
     return $para;
+  }
+  public function add_heading($text, $level = 1) {
+    return $this->add_para($text, "Heading $level");
+  }
+  public function add_from_file($file_name, $style_name = "ParaText") {
+    $lines = file($file_name, FILE_IGNORE_NEW_LINES);
+    foreach ($lines as $line) {
+      $this->add_para($line, $style_name);
+    }
   }
 }

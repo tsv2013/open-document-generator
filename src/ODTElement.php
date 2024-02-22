@@ -6,6 +6,7 @@ class ODTElement {
   protected $namespase = "";
   protected $name = "";
   protected $attributes = "";
+  protected $self_closing = false;
   public $style_name;
   public $styles = [];
   protected $content = [];
@@ -14,24 +15,29 @@ class ODTElement {
     $this->name = $name;
     $this->style_name = $style_name;
   }
-  protected function get_content() {
+  public function get_content() {
     foreach ($this->content as $content_item) {
       yield from $content_item->create();
     }
   }
   protected function update_attributes() {
   }
-  public function create_head() {
-    yield "<{$this->namespase}:{$this->name} {$this->attributes}>";
+  public function get_head() {
+    $closing_content = $this->self_closing ? "/" : "";
+    yield "<{$this->namespase}:{$this->name} {$this->attributes} {$closing_content}>";
   }
-  public function create_tail() {
+  public function get_tail() {
     yield "</{$this->namespase}:{$this->name}>";
   }
   public function create() {
     $this->update_attributes();
-    yield from $this->create_head();
-    yield from $this->get_content();
-    yield from $this->create_tail();
+    if(!$this->self_closing) {
+      yield from $this->get_head();
+      yield from $this->get_content();
+      yield from $this->get_tail();
+    } else {
+      yield from $this->get_head(true);
+    }
   }
   public function create_style($style_name, $style_family = "text", $parent_style = "Standard", $properties = "") {
     $style = new ODTStyle($style_name, $parent_style, $style_family);
@@ -45,6 +51,11 @@ class ODTElement {
     array_push($this->styles, ...$element->styles);
     array_push($this->content, $element);
   }
+  public function write($file_handle) {
+    foreach ($this->create() as $doc_str)  {
+      fwrite($file_handle, $doc_str);
+    }
+  }
 }
 
 class ODTPara extends ODTElement {
@@ -54,8 +65,16 @@ class ODTPara extends ODTElement {
     $this->text = $text;
     $this->attributes = "text:style-name=\"$style_name\"";
   }
-  protected function get_content() {
+  public function get_content() {
     yield $this->text;
     // yield "<text:span text:style-name=\"$this->style_name\">$this->text</text:span>";
   }
 }
+
+// class ODTSoftPageBreak extends ODTElement {
+//   function __construct() {
+//     parent::__construct("text", "soft-page-break");
+//     $this->self_closing = true;
+//   }
+// }
+

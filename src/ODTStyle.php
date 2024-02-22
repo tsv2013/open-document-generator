@@ -16,6 +16,7 @@ class ODTProperties extends ODTElement {
     }
   }
 }
+
 class ODTStyleTextProperties extends ODTProperties {
   function __construct() {
     parent::__construct("style", "text-properties");
@@ -33,14 +34,19 @@ class ODTStyleTextProperties extends ODTProperties {
     $this->properties["style:text-position"] = null; // sub or super
   }
 }
+
 class ODTStyleParagraphProperties extends ODTProperties {
   function __construct() {
     parent::__construct("style", "paragraph-properties");
     $this->properties["fo:text-align"] = "left"; // start, end, left, right, center or justify
     $this->properties["fo:text-indent"] = "0cm";
     $this->properties["style:justify-single-word"] = "false";
+    $this->properties["fo:keep-with-next"] = null; // auto or always
+    $this->properties["fo:break-before"] = null; // auto, column or page
+    $this->properties["fo:break-after"] = null; // auto, column or page
   }
 }
+
 class ODTStyleCellProperties extends ODTProperties {
   function __construct() {
     parent::__construct("style", "table-cell-properties");
@@ -51,6 +57,7 @@ class ODTStyleCellProperties extends ODTProperties {
     $this->properties["fo:border-bottom"] = "none";
   }
 }
+
 class ODTStyleColumnProperties extends ODTProperties {
   function __construct() {
     parent::__construct("style", "table-column-properties");
@@ -63,6 +70,7 @@ class ODTStyleColumnProperties extends ODTProperties {
     $this->properties["style:rel-column-width"] = $percent."*";
   }
 }
+
 class ODTStyle extends ODTElement {
   private $style_family;
   public $properties;
@@ -85,7 +93,7 @@ class ODTStyle extends ODTElement {
         break;
       }
   }
-  protected function get_content() {
+  public function get_content() {
     if(isset($this->properties) && strlen($this->properties) > 0) {
       yield $this->properties;
     } else {
@@ -96,7 +104,12 @@ class ODTStyle extends ODTElement {
     if(!isset($style_family)) {
       $style_family = $this->style_family;
     }
-    // TODO: find properties by name (namespace:name)
+    $properties_name = $style_family . "-properties";
+    foreach ($this->content as $content_item) {
+      if($content_item->name == $properties_name) {
+        return $content_item;
+      }
+    }
     return $this->content[0];
   }
 }

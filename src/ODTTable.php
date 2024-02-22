@@ -38,7 +38,7 @@ class ODTTable extends ODTElement {
     array_push($this->content, $row);
     return $row;
   }
-  protected function get_content() {
+  public function get_content() {
     foreach ($this->columns as $column) {
       yield from $column->create();
     }
@@ -52,6 +52,7 @@ class ODTTable extends ODTElement {
     yield from parent::get_content();
   }
 }
+
 class ODTTableColumn extends ODTElement {
   public $column_style;
   function __construct($column_style, $column_repeated = 1) {
@@ -60,6 +61,7 @@ class ODTTableColumn extends ODTElement {
     $this->attributes = "table:style-name=\"$column_style->style_name\" table:number-columns-repeated=\"$column_repeated\"";
   }
 }
+
 class ODTTableRow extends ODTElement {
   function __construct() {
     parent::__construct("table", "table-row");
@@ -76,6 +78,7 @@ class ODTTableRow extends ODTElement {
     array_push($cell->content, $para);
   }
 }
+
 class ODTTableCell extends ODTElement {
   function __construct($style_name = "TableCell", $col_span = null) {
     parent::__construct("table", "table-cell", $style_name);

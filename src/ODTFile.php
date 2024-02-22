@@ -7,7 +7,7 @@ class ODTFile extends ZipArchive {
   protected $content;
   public $path;
 
-  public function __construct($filename, $template_path = '/../cl_templates/document/' ){
+  public function __construct($filename, $template_path = "/templates/default/" ){
     $this->path = dirname(__FILE__) . $template_path;
     if ($this->open($filename, ZIPARCHIVE::CREATE) !== TRUE) {
       die("Unable to open <$filename>\n");
@@ -33,8 +33,8 @@ class ODTFile extends ZipArchive {
     $this->addFile($filename, "content.xml");
     $this->close();
   }
-  public function create_from_document($document) {
-    $tmpfname = tempnam(dirname(__FILE__) . "/../temp/cl/", "doc_cl_");
+  public function create_from_document($document, $temp_path = "/../temp/") {
+    $tmpfname = tempnam(dirname(__FILE__) . $temp_path, "doc_odt_");
     $handle = fopen($tmpfname, "w");
     foreach($document->create() as $doc_str) {
       fwrite($handle, $doc_str);
