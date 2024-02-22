@@ -72,9 +72,9 @@ class ODTTableRow extends ODTElement {
     array_push($this->content, $cell);
     return $cell;
   }
-  function add_cell_with_text($text, $cell_style = "TableCell", $style = "Standard", $col_span = null) {
+  function add_cell_with_text($text, $cell_style = "TableCell", $text_style = "Standard", $col_span = null) {
     $cell = $this->create_cell($cell_style, $col_span);
-    $para = new ODTPara($style, $text);
+    $para = new ODTPara($text, $text_style);
     array_push($cell->content, $para);
   }
 }

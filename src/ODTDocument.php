@@ -58,7 +58,7 @@ class ODTDocument extends ODTElement {
     yield from parent::get_tail();
   }
   public function add_para($text, $style_name = "Standard") {
-    $para = new ODTPara($style_name, $text);
+    $para = new ODTPara($text, $style_name);
     $this->add($para);
     return $para;
   }

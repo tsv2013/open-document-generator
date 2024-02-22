@@ -60,7 +60,7 @@ class ODTElement {
 
 class ODTPara extends ODTElement {
   public $text = "";
-  function __construct($style_name, $text) {
+  function __construct($text, $style_name = "Standard") {
     parent::__construct("text", "p", $style_name);
     $this->text = $text;
     $this->attributes = "text:style-name=\"$style_name\"";
