@@ -54,9 +54,21 @@
             <style:table-row-properties fo:keep-together="auto"/>
         </style:default-style>
         <style:style style:name="Standard" style:family="paragraph" style:class="text"/>
-        <style:style style:name="Heading" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text_20_body" style:class="text">
+        <style:style style:name="ParaText" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text" style:class="text">
+            <style:paragraph-properties fo:text-indent="1cm" fo:text-align="justify"/>
+            <style:text-properties fo:font-size="11pt" style:font-size-asian="11pt" style:font-size-complex="11pt"/>
+        </style:style>
+        <style:style style:name="Heading" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text" style:class="text">
             <style:paragraph-properties fo:margin-top="0.423cm" fo:margin-bottom="0.212cm" fo:keep-with-next="always"/>
             <style:text-properties style:font-name="Arial" fo:font-size="14pt" style:font-name-asian="Microsoft YaHei" style:font-size-asian="14pt" style:font-name-complex="Arial1" style:font-size-complex="14pt"/>
+        </style:style>
+        <style:style style:name="Heading 1" style:display-name="Heading 1" style:family="paragraph" style:parent-style-name="Heading" style:default-outline-level="1" style:next-style-name="Text" style:class="text">
+            <style:paragraph-properties fo:margin-top="0.5cm" fo:margin-bottom="0.25cm" fo:keep-with-next="always"/>
+            <style:text-properties fo:font-weight="bold" style:font-name="Arial" fo:font-size="14pt" style:font-name-asian="Microsoft YaHei" style:font-size-asian="14pt" style:font-name-complex="Arial1" style:font-size-complex="14pt"/>
+        </style:style>
+        <style:style style:name="Heading 2" style:display-name="Heading 2" style:family="paragraph" style:parent-style-name="Heading" style:default-outline-level="2" style:next-style-name="Text" style:class="text">
+            <style:paragraph-properties fo:margin-top="0.5cm" fo:margin-bottom="0.25cm" fo:keep-with-next="always"/>
+            <style:text-properties fo:font-weight="bold" style:font-name="Arial" fo:font-size="13pt" style:font-name-asian="Microsoft YaHei" style:font-size-asian="13pt" style:font-name-complex="Arial1" style:font-size-complex="13pt"/>
         </style:style>
         <style:style style:name="Caption" style:family="paragraph" style:parent-style-name="Standard" style:class="extra">
             <style:paragraph-properties fo:margin-top="0.212cm" fo:margin-bottom="0.212cm" text:number-lines="false" text:line-number="0"/>
@@ -88,10 +100,11 @@
     <office:automatic-styles>
         <style:style style:name="MP1" style:family="paragraph" style:parent-style-name="Header">
             <style:paragraph-properties fo:text-align="end" style:justify-single-word="false"/>
-            <style:text-properties fo:language="en" fo:country="US"/>
+            <style:text-properties fo:font-size="10pt" fo:language="ru" fo:country="RU"/>
         </style:style>
         <style:style style:name="MP2" style:family="paragraph" style:parent-style-name="Footer">
             <style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+            <style:text-properties fo:font-size="10pt" fo:language="ru" fo:country="RU"/>
         </style:style>
         <style:page-layout style:name="Mpm1">
             <style:page-layout-properties fo:page-width="21.001cm" fo:page-height="29.7cm" style:num-format="1" style:print-orientation="portrait" fo:margin-top="2cm" fo:margin-bottom="2cm" fo:margin-left="2cm" fo:margin-right="2cm" style:writing-mode="lr-tb" style:footnote-max-height="0cm">
