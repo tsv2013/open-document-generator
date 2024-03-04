@@ -7,7 +7,9 @@ class ODTFile extends ZipArchive {
   protected $content;
   public $path;
 
-  public function __construct($filename, $template_path = "/templates/default/" ){
+  public function __construct($filename, $template_path = "/templates/%extension%/" ){
+    $path_info = pathinfo($filename);
+    $template_path = str_replace("%extension%", $path_info['extension'], $template_path);
     $this->path = dirname(__FILE__) . $template_path;
     if ($this->open($filename, ZIPARCHIVE::CREATE) !== TRUE) {
       die("Unable to open <$filename>\n");
@@ -24,12 +26,10 @@ class ODTFile extends ZipArchive {
   }
 
   public function create_from_content($content) {
-    // $this->addFromString("word/document.xml", str_replace( '{CONTENT}', $this->content, file_get_contents( $this->path . "word/document.xml" ) ) );
     $this->addFromString("content.xml", $content);
     $this->close();
   }
   public function create_from_file($filename) {
-    // $this->create_from_content(file_get_contents($filename));
     $this->addFile($filename, "content.xml");
     $this->close();
   }
