@@ -34,7 +34,7 @@ class ODTFile extends ZipArchive {
     $this->close();
   }
   public function create_from_document($document, $temp_path = "/../temp/") {
-    $tmpfname = tempnam(dirname(__FILE__) . $temp_path, "doc_odt_");
+    $tmpfname = tempnam(dirname(__FILE__) . $temp_path, "doc_oog_");
     $handle = fopen($tmpfname, "w");
     foreach($document->create() as $doc_str) {
       fwrite($handle, $doc_str);
