@@ -26,7 +26,7 @@ class ODTTable extends ODTElement {
       array_push($this->columns, $column);
     }
 
-    $this->attributes = "table:style-name=\"$this->style_name\"";
+    $this->attributes = "table:name=\"Sheet$this->unique_id\" table:style-name=\"$this->style_name\"";
   }
   function create_header_row() {
     $row = new ODTTableRow();
