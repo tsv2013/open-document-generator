@@ -36,8 +36,8 @@
   $row->add_cell_with_text("Column 1");
   $row->add_cell_with_text("Column 2");
   $row = $table->create_row();
-  $row->add_cell_with_text("val 1", "TableCell", "TableText");
-  $row->add_cell_with_text("val 2", "TableCell", "TableText");
+  $row->add_cell_with_text("val 1");
+  $row->add_cell_with_text("val 2");
 
   $docFile->create();
   ```
