@@ -2,11 +2,17 @@
 
 ## Oped Document Generator library
   Allows to create and store an ODT file. Supports:
-  - styles
   - headers
   - paragraphs
   - tables
   - tables of content
+  - styles: text, paragraph, table cell, table column
+
+  Requirements:
+  - zip library enabled in php.ini file
+```
+extension=zip
+```  
 
 ## Sample usage
   
