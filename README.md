@@ -1,6 +1,6 @@
 [![PHP Composer](https://github.com/tsv2013/open-office-generator/actions/workflows/php.yml/badge.svg)](https://github.com/tsv2013/open-office-generator/actions/workflows/php.yml)
 
-## Oped Document Generator library
+## Open Document Generator library
   Allows to create and store an ODT file. Supports:
   - headers
   - paragraphs
