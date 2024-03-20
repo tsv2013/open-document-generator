@@ -1,5 +1,5 @@
 {
-    "name": "tsv2013/open-office-generator",
+    "name": "open-office-generator",
     "type": "library",
     "minimum-stability": "stable",
     "prefer-stable": true,
