@@ -5,7 +5,8 @@ namespace OpenOfficeGenerator;
 class ODSDocument extends OODocument {
   function __construct() {
     parent::__construct();
-    $this->manifest->add_file_entry("application/vnd.oasis.opendocument.spreadsheet", "/");
+    $this->mimetype = "application/vnd.oasis.opendocument.spreadsheet";
+    $this->manifest->add_file_entry($this->mimetype, "/");
   }
   public function get_head() {
     yield from parent::get_head(false);

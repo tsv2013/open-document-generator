@@ -4,6 +4,7 @@ namespace OpenOfficeGenerator;
 
 class OODocument extends OOElement {
   public OOManifest $manifest;
+  public $mimetype = "application/vnd.oasis.opendocument";
   function __construct() {
     parent::__construct("office", "document-content");
     $this->attributes = "xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\"

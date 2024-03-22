@@ -3,8 +3,9 @@
 namespace OpenOfficeGenerator;
 
 class OOFile extends \ZipArchive {
-  public static $content_file_name = "content.xml";
+  public static $mimetype_file_name = "mimetype";
   public static $manifest_file_name = "META-INF/manifest.xml";
+  public static $content_file_name = "content.xml";
   private $files;
   public $document;
   public $path;
@@ -32,8 +33,9 @@ class OOFile extends \ZipArchive {
       }
       $this->addEmptyDir('META-INF');
       $this->files = array(
-        "styles.xml",
-        "mimetype"
+        // "META-INF/manifest.xml",
+        // "mimetype",
+        "styles.xml"
       );
       foreach($this->files as $f) {
         $this->addFile($this->path.$f, $f);
@@ -73,10 +75,11 @@ class OOFile extends \ZipArchive {
     if(isset($document->pictures)) {
       $this->addEmptyDir('Pictures');
       foreach($document->pictures as $image_name => $image_path) {
-        $this->addFile($image_path, "/Pictures/$image_name");
+        $this->addFile($image_path, "Pictures/$image_name");
       }
     }
 
+    $this->addFromString(OOFile::$mimetype_file_name, $document->mimetype);
     $this->addFromString(OOFile::$manifest_file_name, $document->manifest->get_xml());
 
     $this->create_from_file($tmpfname);
