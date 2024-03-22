@@ -2,7 +2,7 @@
 
 namespace OpenDocumentGenerator;
 
-function get_uuid_file_Name($extension = "") {
+function get_uuid_file_name($extension = "") {
   mt_srand((double)microtime()*10000);
   $charid = strtoupper(md5(uniqid(rand(), true)));
   $uuid = ""
@@ -47,7 +47,7 @@ class ODTDocument extends ODDocument {
     $para = new ODTPara("");
     $path_info = pathinfo($image_path);
     $extension = $path_info['extension'];
-    $unique_name = get_uuid_file_Name($extension);
+    $unique_name = get_uuid_file_name($extension);
     $image_file_entry = "Pictures/" . $unique_name;
     $image = new ODTDrawFrame($image_file_entry);
     $para->add($image);
