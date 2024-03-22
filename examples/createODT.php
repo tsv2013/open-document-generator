@@ -12,7 +12,7 @@ $docFile = new ODFile($fileName);
 $document = $docFile->document;
 $document->add_heading("Test heading");
 $document->add_para("Lorem ipsum");
-// $document->add_image(dirname(__FILE__) . "/test-image.png");
+$document->add_image(dirname(__FILE__) . "/test-image.png");
 
 $table = new ODTable([10, 7]);
 $document->add($table);

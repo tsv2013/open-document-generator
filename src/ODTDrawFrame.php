@@ -14,7 +14,7 @@ class ODTDrawFrame extends ODElement {
     $this->style_name = "DrawFrame$this->unique_id";
     $this->create_style($this->style_name, "graphic", "Graphics");
 
-    $this->attributes = "draw:style-name=\"$this->style_name\" draw:name=\"graphics$this->unique_id\" text:anchor-type=\"paragraph\" draw:z-index=\"0\""; // svg:width=\"9.999cm\" svg:height=\"3.755cm\"
+    $this->attributes = "draw:style-name=\"$this->style_name\" draw:name=\"graphics$this->unique_id\" text:anchor-type=\"paragraph\" svg:width=\"9.0cm\" svg:height=\"6.0cm\" draw:z-index=\"0\"";
   }
   public function get_content() {
     yield "<draw:image xlink:href=\"$this->image\" xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" />";
