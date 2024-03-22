@@ -2,7 +2,7 @@
 
 namespace OpenDocumentGenerator;
 
-class ODTableOfContents extends ODElement {
+class ODTTableOfContents extends ODElement {
     public $toc_title;
     protected $toc_style;
     function __construct($toc_title = "Content", $toc_name = "TableOfContent") {
