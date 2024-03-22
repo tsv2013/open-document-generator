@@ -6,6 +6,7 @@ class ODTProperties extends ODTElement {
   public $properties = [];
   function __construct($namespase, $name) {
     parent::__construct($namespase, $name);
+    $this->self_closing = true;
   }
   protected function update_attributes() {
     $this->attributes = "";
@@ -71,6 +72,25 @@ class ODTStyleColumnProperties extends ODTProperties {
   }
 }
 
+class ODTStyleGraphicProperties extends ODTProperties {
+  function __construct() {
+    parent::__construct("style", "graphic-properties");
+    $this->properties["style:horizontal-pos"] = "center";
+    $this->properties["style:horizontal-rel"] = "paragraph";
+    $this->properties["style:mirror"] = "none";
+    $this->properties["fo:clip"] = "rect(0cm, 0cm, 0cm, 0cm)";
+    $this->properties["draw:luminance"] = "0%";
+    $this->properties["draw:contrast"] = "0%";
+    $this->properties["draw:red"] = "0%";
+    $this->properties["draw:green"] = "0%";
+    $this->properties["draw:blue"] = "0%";
+    $this->properties["draw:gamma"] = "100%";
+    $this->properties["draw:color-inversion"] = "false";
+    $this->properties["draw:image-opacity"] = "100%";
+    $this->properties["draw:color-mode"] = "standard";
+  }
+}
+
 class ODTStyle extends ODTElement {
   private $style_family;
   public $properties;
@@ -90,6 +110,9 @@ class ODTStyle extends ODTElement {
         break;
       case "table-column":
         $this->add(new ODTStyleColumnProperties());
+        break;
+      case "graphic": // style:parent-style-name="Graphics"
+        $this->add(new ODTStyleGraphicProperties());
         break;
       }
   }

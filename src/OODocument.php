@@ -3,6 +3,7 @@
 namespace OpenOfficeGenerator;
 
 class OODocument extends ODTElement {
+  public OOManifest $manifest;
   function __construct() {
     parent::__construct("office", "document-content");
     $this->attributes = "xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\"
@@ -35,6 +36,7 @@ class OODocument extends ODTElement {
                           xmlns:tableooo=\"http://openoffice.org/2009/table\"
                           xmlns:textooo=\"http://openoffice.org/2013/office\"
                           xmlns:field=\"urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0\" office:version=\"1.2\"";
+    $this->manifest = new OOManifest();
     $this->create_style("TableCell", "table-cell");
   }
   public function get_head() {

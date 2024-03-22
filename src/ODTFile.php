@@ -4,6 +4,7 @@ namespace OpenOfficeGenerator;
 
 class ODTFile extends \ZipArchive {
   public static $content_file_name = "content.xml";
+  public static $manifest_file_name = "META-INF/manifest.xml";
   private $files;
   public $document;
   public $path;
@@ -29,8 +30,8 @@ class ODTFile extends \ZipArchive {
       if ($this->open($filename, \ZIPARCHIVE::CREATE) !== TRUE) {
         die("Unable to create <$filename>\n");
       }
+      $this->addEmptyDir('META-INF');
       $this->files = array(
-        "META-INF/manifest.xml",
         "styles.xml",
         "mimetype"
       );
@@ -57,13 +58,26 @@ class ODTFile extends \ZipArchive {
   public function create($temp_path = "/../temp/") {
     $this->create_from_document($this->document, $temp_path);
   }
-  public function create_from_document(ODTElement $document, $temp_path = "/../temp/") {
-    $tmpfname = tempnam(dirname(__FILE__) . $temp_path, "doc_oog_");
+  public function create_from_document(OODocument $document, $temp_path = "/../temp/") {
+    $tmp_dir = dirname(__FILE__) . $temp_path;
+    if (!file_exists($tmp_dir)) {
+      mkdir($tmp_dir, 0777, true);
+    }
+    $tmpfname = tempnam($tmp_dir, "doc_oog_");
     $handle = fopen($tmpfname, "w");
     foreach($document->create() as $doc_str) {
       fwrite($handle, $doc_str);
     }
     fclose($handle);
+
+    if(isset($document->pictures)) {
+      $this->addEmptyDir('Pictures');
+      foreach($document->pictures as $image_name => $image_path) {
+        $this->addFile($image_path, "/Pictures/$image_name");
+      }
+    }
+
+    $this->addFromString(ODTFile::$manifest_file_name, $document->manifest->get_xml());
 
     $this->create_from_file($tmpfname);
     unlink($tmpfname);

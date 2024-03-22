@@ -94,6 +94,11 @@
                 </style:tab-stops>
             </style:paragraph-properties>
         </style:style>
+        <style:style style:name="Graphics" style:family="graphic">
+            <style:graphic-properties text:anchor-type="paragraph" svg:x="0cm" svg:y="0cm"
+                style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph"
+                style:horizontal-pos="center" style:horizontal-rel="paragraph" />
+        </style:style>
         <text:notes-configuration text:note-class="footnote" style:num-format="1" text:start-value="0" text:footnotes-position="page" text:start-numbering-at="document"/>
         <text:notes-configuration text:note-class="endnote" style:num-format="i" text:start-value="0"/>
     </office:styles>

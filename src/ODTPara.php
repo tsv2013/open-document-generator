@@ -10,8 +10,12 @@ class ODTPara extends ODTElement {
     $this->attributes = "text:style-name=\"$style_name\"";
   }
   public function get_content() {
-    yield $this->text;
     // yield "<text:span text:style-name=\"$this->style_name\">$this->text</text:span>";
+    if(count($this->content) > 0) {
+      yield from parent::get_content();
+    } else {
+      yield $this->text;
+    }
   }
 }
 
