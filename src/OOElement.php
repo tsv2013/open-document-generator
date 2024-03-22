@@ -2,7 +2,7 @@
 
 namespace OpenOfficeGenerator;
 
-class ODTElement {
+class OOElement {
   protected $namespace = "";
   protected $name = "";
   protected $attributes = "";
@@ -89,7 +89,7 @@ class ODTElement {
     foreach ($tags as $tag) {
       $index = count($elements);
       if ($tag['type'] == "complete" || $tag['type'] == "open") {
-        $elements[$index] = $index == 0 ? $this : new ODTElement;
+        $elements[$index] = $index == 0 ? $this : new OOElement;
         $tag_pieces = explode(":", $tag['tag']);
         $elements[$index]->namespace = $tag_pieces[0];
         $elements[$index]->name = $tag_pieces[1];

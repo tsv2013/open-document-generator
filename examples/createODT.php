@@ -8,7 +8,7 @@ $fileName = dirname(__FILE__) . "/../temp/document1.odt";
 if(file_exists($fileName)) {
     unlink($fileName);
 }
-$docFile = new ODTFile($fileName);
+$docFile = new OOFile($fileName);
 $document = $docFile->document;
 $document->add_heading("Test heading");
 $document->add_para("Lorem ipsum");

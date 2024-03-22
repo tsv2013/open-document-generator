@@ -2,7 +2,7 @@
 
 namespace OpenOfficeGenerator;
 
-class ODTTable extends ODTElement {
+class ODTTable extends OOElement {
   private static $next_unique_id = 1;
   private $unique_id;
   public $columns = [];
@@ -53,7 +53,7 @@ class ODTTable extends ODTElement {
   }
 }
 
-class ODTTableColumn extends ODTElement {
+class ODTTableColumn extends OOElement {
   public $column_style;
   function __construct($column_style, $column_repeated = 1) {
     $this->column_style = $column_style;
@@ -62,7 +62,7 @@ class ODTTableColumn extends ODTElement {
   }
 }
 
-class ODTTableRow extends ODTElement {
+class ODTTableRow extends OOElement {
   function __construct() {
     parent::__construct("table", "table-row");
     $this->attributes = "";
@@ -79,7 +79,7 @@ class ODTTableRow extends ODTElement {
   }
 }
 
-class ODTTableCell extends ODTElement {
+class ODTTableCell extends OOElement {
   function __construct($style_name = "TableCell", $col_span = null) {
     parent::__construct("table", "table-cell", $style_name);
     $this->attributes = "table:style-name=\"$style_name\"";

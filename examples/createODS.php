@@ -8,7 +8,7 @@ $fileName = dirname(__FILE__) . "/../temp/document1.ods";
 if(file_exists($fileName)) {
     unlink($fileName);
 }
-$docFile = new ODTFile($fileName);
+$docFile = new OOFile($fileName);
 $document = $docFile->document;
 
 $table = new ODTTable([10, 7]);

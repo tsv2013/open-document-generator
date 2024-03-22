@@ -20,7 +20,7 @@ extension=zip
 
   ```PHP
   $fileName = dirname(__FILE__) . "/document1.odt";
-  $docFile = new ODTFile($fileName);
+  $docFile = new OOFile($fileName);
   $document = $docFile->document;
   $document->add_heading("Test heading");
   $document->add_para("Lorem ipsum");
@@ -32,7 +32,7 @@ extension=zip
 
   ```PHP
   $fileName = dirname(__FILE__) . "/document1.ods";
-  $docFile = new ODTFile($fileName);
+  $docFile = new OOFile($fileName);
   $document = $docFile->document;
 
   $table = new ODTTable([10, 7]);

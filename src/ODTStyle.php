@@ -2,7 +2,7 @@
 
 namespace OpenOfficeGenerator;
 
-class ODTProperties extends ODTElement {
+class ODTProperties extends OOElement {
   public $properties = [];
   function __construct($namespase, $name) {
     parent::__construct($namespase, $name);
@@ -91,7 +91,7 @@ class ODTStyleGraphicProperties extends ODTProperties {
   }
 }
 
-class ODTStyle extends ODTElement {
+class ODTStyle extends OOElement {
   private $style_family;
   public $properties;
   function __construct($style_name, $parent_style = "Standard", $style_family = "text") {

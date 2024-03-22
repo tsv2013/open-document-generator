@@ -2,7 +2,7 @@
 
 namespace OpenOfficeGenerator;
 
-class OODocument extends ODTElement {
+class OODocument extends OOElement {
   public OOManifest $manifest;
   function __construct() {
     parent::__construct("office", "document-content");

@@ -4,13 +4,13 @@ namespace OpenOfficeGenerator;
 
 use PHPUnit\Framework\TestCase;
 
-class ODTElementTest extends TestCase {
+class OOElementTest extends TestCase {
     public function testConstructor() {
-        $element = new ODTElement("test-namespace", "test-name");
+        $element = new OOElement("test-namespace", "test-name");
         $this->assertEquals("<test-namespace:test-name  >\n</test-namespace:test-name>", $element->get_xml());
     }
     public function testParseXml() {
-        $element = new ODTElement("", "");
+        $element = new OOElement("", "");
         $element->parse_xml("<test-namespace:test-name  ></test-namespace:test-name>");
         $this->assertEquals("<test-namespace:test-name  />", $element->get_xml());
     }

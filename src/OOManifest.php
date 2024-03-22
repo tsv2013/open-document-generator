@@ -2,7 +2,7 @@
 
 namespace OpenOfficeGenerator;
 
-class OOManifest extends ODTElement {
+class OOManifest extends OOElement {
   function __construct() {
     parent::__construct("manifest", "manifest");
     $this->attributes = "xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\" manifest:version=\"1.2\"";
@@ -32,7 +32,7 @@ class OOManifest extends ODTElement {
   }
 }
 
-class OOManifestFileEntry extends ODTElement {
+class OOManifestFileEntry extends OOElement {
   function __construct($type, $full_path) {
     parent::__construct("manifest", "file-entry");
     $this->attributes = "manifest:media-type=\"$type\" manifest:full-path=\"$full_path\"";

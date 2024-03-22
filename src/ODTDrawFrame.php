@@ -2,7 +2,7 @@
 
 namespace OpenOfficeGenerator;
 
-class ODTDrawFrame extends ODTElement {
+class ODTDrawFrame extends OOElement {
   private static $next_unique_id = 1;
   private $unique_id;
   private $image;

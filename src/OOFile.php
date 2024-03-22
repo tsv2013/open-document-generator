@@ -2,7 +2,7 @@
 
 namespace OpenOfficeGenerator;
 
-class ODTFile extends \ZipArchive {
+class OOFile extends \ZipArchive {
   public static $content_file_name = "content.xml";
   public static $manifest_file_name = "META-INF/manifest.xml";
   private $files;
@@ -22,8 +22,8 @@ class ODTFile extends \ZipArchive {
       if ($this->open($filename, \ZIPARCHIVE::OVERWRITE) !== TRUE) {
         die("Unable to open <$filename>\n");
       }
-      if ($zip->locateName(ODTFile::$content_file_name) !== false) {
-        $doc_xml_content = $this->getFromName(ODTFile::$content_file_name);
+      if ($zip->locateName(OOFile::$content_file_name) !== false) {
+        $doc_xml_content = $this->getFromName(OOFile::$content_file_name);
         $this->document->parse_xml($doc_xml_content);
       }
     } else {
@@ -42,17 +42,17 @@ class ODTFile extends \ZipArchive {
   }
 
   public function create_from_xml($xml_string) {
-    if ($this->locateName(ODTFile::$content_file_name) !== false) {
-      $this->deleteName(ODTFile::$content_file_name);
+    if ($this->locateName(OOFile::$content_file_name) !== false) {
+      $this->deleteName(OOFile::$content_file_name);
     }
-    $this->addFromString(ODTFile::$content_file_name, $xml_string);
+    $this->addFromString(OOFile::$content_file_name, $xml_string);
     $this->close();
   }
   public function create_from_file($filename) {
-    if ($this->locateName(ODTFile::$content_file_name) !== false) {
-      $this->deleteName(ODTFile::$content_file_name);
+    if ($this->locateName(OOFile::$content_file_name) !== false) {
+      $this->deleteName(OOFile::$content_file_name);
     }
-    $this->addFile($filename, ODTFile::$content_file_name);
+    $this->addFile($filename, OOFile::$content_file_name);
     $this->close();
   }
   public function create($temp_path = "/../temp/") {
@@ -77,7 +77,7 @@ class ODTFile extends \ZipArchive {
       }
     }
 
-    $this->addFromString(ODTFile::$manifest_file_name, $document->manifest->get_xml());
+    $this->addFromString(OOFile::$manifest_file_name, $document->manifest->get_xml());
 
     $this->create_from_file($tmpfname);
     unlink($tmpfname);
