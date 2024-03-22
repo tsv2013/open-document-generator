@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -8,10 +8,10 @@ $fileName = dirname(__FILE__) . "/../temp/document1.ods";
 if(file_exists($fileName)) {
     unlink($fileName);
 }
-$docFile = new OOFile($fileName);
+$docFile = new ODFile($fileName);
 $document = $docFile->document;
 
-$table = new ODTTable([10, 7]);
+$table = new ODTable([10, 7]);
 $document->add($table);
 
 $row = $table->create_row();

@@ -1,16 +1,16 @@
 <?php
 
-namespace  OpenOfficeGenerator;
+namespace  OpenDocumentGenerator;
 
 use PHPUnit\Framework\TestCase;
 
-class ODTStyleTest extends TestCase {
+class ODStyleTest extends TestCase {
     public function testConstructor() {
-        $style = new ODTStyle("Custom");
+        $style = new ODStyle("Custom");
         $this->assertStringEqualsStringIgnoringLineEndings("<style:style style:name=\"Custom\" style:family=\"text\" style:parent-style-name=\"Standard\" >
 <style:text-properties  fo:font-size=\"11.00pt\" fo:background-color=\"transparent\" fo:font-family=\"Arial\" style:use-window-font-color=\"true\" />
 </style:style>", $style->get_xml());
-        $property = new \ReflectionProperty("OpenOfficeGenerator\ODTStyle", "content");
+        $property = new \ReflectionProperty("OpenDocumentGenerator\ODStyle", "content");
         $property->setAccessible(true);
         $style_properties = $property->getValue($style);
         $this->assertIsList($style_properties);
@@ -21,7 +21,7 @@ class ODTStyleTest extends TestCase {
     }
     public function testParseXml() {
         $this->markTestSkipped('must be revisited');
-        $style = new ODTStyle("Custom");
+        $style = new ODStyle("Custom");
         $style->parse_xml("<style:style style:name=\"Custom\" style:family=\"text\" style:parent-style-name=\"Standard\" >
         <style:text-properties  fo:font-size=\"11.00pt\" fo:background-color=\"transparent\" fo:font-family=\"Arial\" style:use-window-font-color=\"true\" />
         </style:style>");

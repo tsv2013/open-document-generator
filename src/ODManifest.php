@@ -1,8 +1,8 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
-class OOManifest extends OOElement {
+class ODManifest extends ODElement {
   function __construct() {
     parent::__construct("manifest", "manifest");
     $this->attributes = "xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\" manifest:version=\"1.2\"";
@@ -26,13 +26,13 @@ class OOManifest extends OOElement {
     yield from parent::get_content();
   }
   public function add_file_entry($type, $full_path) {
-    $file_entry = new OOManifestFileEntry($type, $full_path);
+    $file_entry = new ODManifestFileEntry($type, $full_path);
     $this->add($file_entry);
     return $file_entry;
   }
 }
 
-class OOManifestFileEntry extends OOElement {
+class ODManifestFileEntry extends ODElement {
   function __construct($type, $full_path) {
     parent::__construct("manifest", "file-entry");
     $this->attributes = "manifest:media-type=\"$type\" manifest:full-path=\"$full_path\"";

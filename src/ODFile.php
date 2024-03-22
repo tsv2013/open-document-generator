@@ -1,8 +1,8 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
-class OOFile extends \ZipArchive {
+class ODFile extends \ZipArchive {
   public static $mimetype_file_name = "mimetype";
   public static $manifest_file_name = "META-INF/manifest.xml";
   public static $content_file_name = "content.xml";
@@ -23,8 +23,8 @@ class OOFile extends \ZipArchive {
       if ($this->open($filename, \ZIPARCHIVE::OVERWRITE) !== TRUE) {
         die("Unable to open <$filename>\n");
       }
-      if ($zip->locateName(OOFile::$content_file_name) !== false) {
-        $doc_xml_content = $this->getFromName(OOFile::$content_file_name);
+      if ($zip->locateName(ODFile::$content_file_name) !== false) {
+        $doc_xml_content = $this->getFromName(ODFile::$content_file_name);
         $this->document->parse_xml($doc_xml_content);
       }
     } else {
@@ -44,23 +44,23 @@ class OOFile extends \ZipArchive {
   }
 
   public function create_from_xml($xml_string) {
-    if ($this->locateName(OOFile::$content_file_name) !== false) {
-      $this->deleteName(OOFile::$content_file_name);
+    if ($this->locateName(ODFile::$content_file_name) !== false) {
+      $this->deleteName(ODFile::$content_file_name);
     }
-    $this->addFromString(OOFile::$content_file_name, $xml_string);
+    $this->addFromString(ODFile::$content_file_name, $xml_string);
     $this->close();
   }
   public function create_from_file($filename) {
-    if ($this->locateName(OOFile::$content_file_name) !== false) {
-      $this->deleteName(OOFile::$content_file_name);
+    if ($this->locateName(ODFile::$content_file_name) !== false) {
+      $this->deleteName(ODFile::$content_file_name);
     }
-    $this->addFile($filename, OOFile::$content_file_name);
+    $this->addFile($filename, ODFile::$content_file_name);
     $this->close();
   }
   public function create($temp_path = "/../temp/") {
     $this->create_from_document($this->document, $temp_path);
   }
-  public function create_from_document(OODocument $document, $temp_path = "/../temp/") {
+  public function create_from_document(ODDocument $document, $temp_path = "/../temp/") {
     $tmp_dir = dirname(__FILE__) . $temp_path;
     if (!file_exists($tmp_dir)) {
       mkdir($tmp_dir, 0777, true);
@@ -79,8 +79,8 @@ class OOFile extends \ZipArchive {
       }
     }
 
-    $this->addFromString(OOFile::$mimetype_file_name, $document->mimetype);
-    $this->addFromString(OOFile::$manifest_file_name, $document->manifest->get_xml());
+    $this->addFromString(ODFile::$mimetype_file_name, $document->mimetype);
+    $this->addFromString(ODFile::$manifest_file_name, $document->manifest->get_xml());
 
     $this->create_from_file($tmpfname);
     unlink($tmpfname);

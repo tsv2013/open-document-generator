@@ -1,8 +1,8 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
-class ODTTableOfContents extends OOElement {
+class ODTableOfContents extends ODElement {
     public $toc_title;
     protected $toc_style;
     function __construct($toc_title = "Content", $toc_name = "TableOfContent") {

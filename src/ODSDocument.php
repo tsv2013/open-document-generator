@@ -1,8 +1,8 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
-class ODSDocument extends OODocument {
+class ODSDocument extends ODDocument {
   function __construct() {
     parent::__construct();
     $this->mimetype = "application/vnd.oasis.opendocument.spreadsheet";
@@ -17,7 +17,7 @@ class ODSDocument extends OODocument {
     yield from parent::get_tail();
   }
   public function add_sheet() {
-    $sheet = new ODTTable();
+    $sheet = new ODTable();
     $this->add($sheet);
     return $sheet;
   }

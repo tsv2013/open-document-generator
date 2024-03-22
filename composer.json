@@ -1,5 +1,5 @@
 {
-    "name": "tsv2013/open-office-generator",
+    "name": "tsv2013/open-document-generator",
     "type": "library",
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -9,12 +9,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "OpenOfficeGenerator\\": "src/"
+            "OpenDocumentGenerator\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "OpenOfficeGenerator\\Tests\\": "tests/"
+            "OpenDocumentGenerator\\Tests\\": "tests/"
         }
     },
     "authors": [

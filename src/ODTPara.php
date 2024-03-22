@@ -1,8 +1,8 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
-class ODTPara extends OOElement {
+class ODTPara extends ODElement {
   public $text = "";
   function __construct($text, $style_name = "Standard") {
     parent::__construct("text", "p", $style_name);
@@ -19,7 +19,7 @@ class ODTPara extends OOElement {
   }
 }
 
-// class ODTSoftPageBreak extends OOElement {
+// class ODTSoftPageBreak extends ODElement {
 //   function __construct() {
 //     parent::__construct("text", "soft-page-break");
 //     $this->self_closing = true;

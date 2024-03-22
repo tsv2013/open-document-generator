@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
 function get_uuid_file_Name($extension = "") {
   mt_srand((double)microtime()*10000);
@@ -17,7 +17,7 @@ function get_uuid_file_Name($extension = "") {
   return $uuid;
 }
 
-class ODTDocument extends OODocument {
+class ODTDocument extends ODDocument {
   public $pictures = [];
   function __construct() {
     parent::__construct();

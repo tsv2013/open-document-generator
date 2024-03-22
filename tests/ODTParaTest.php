@@ -1,6 +1,6 @@
 <?php
 
-namespace  OpenOfficeGenerator;
+namespace  OpenDocumentGenerator;
 
 use PHPUnit\Framework\TestCase;
 

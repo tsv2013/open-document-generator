@@ -1,8 +1,8 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
-class ODTProperties extends OOElement {
+class ODProperties extends ODElement {
   public $properties = [];
   function __construct($namespase, $name) {
     parent::__construct($namespase, $name);
@@ -18,7 +18,7 @@ class ODTProperties extends OOElement {
   }
 }
 
-class ODTStyleTextProperties extends ODTProperties {
+class ODStyleTextProperties extends ODProperties {
   function __construct() {
     parent::__construct("style", "text-properties");
     $this->properties["fo:font-size"] = "11.00pt";
@@ -36,7 +36,7 @@ class ODTStyleTextProperties extends ODTProperties {
   }
 }
 
-class ODTStyleParagraphProperties extends ODTProperties {
+class ODStyleParagraphProperties extends ODProperties {
   function __construct() {
     parent::__construct("style", "paragraph-properties");
     $this->properties["fo:text-align"] = "left"; // start, end, left, right, center or justify
@@ -48,7 +48,7 @@ class ODTStyleParagraphProperties extends ODTProperties {
   }
 }
 
-class ODTStyleCellProperties extends ODTProperties {
+class ODStyleCellProperties extends ODProperties {
   function __construct() {
     parent::__construct("style", "table-cell-properties");
     $this->properties["fo:padding"] = "0.1cm";
@@ -59,7 +59,7 @@ class ODTStyleCellProperties extends ODTProperties {
   }
 }
 
-class ODTStyleColumnProperties extends ODTProperties {
+class ODStyleColumnProperties extends ODProperties {
   function __construct() {
     parent::__construct("style", "table-column-properties");
     $this->properties["style:column-width"] = "17cm";
@@ -72,7 +72,7 @@ class ODTStyleColumnProperties extends ODTProperties {
   }
 }
 
-class ODTStyleGraphicProperties extends ODTProperties {
+class ODStyleGraphicProperties extends ODProperties {
   function __construct() {
     parent::__construct("style", "graphic-properties");
     $this->properties["style:horizontal-pos"] = "center";
@@ -91,7 +91,7 @@ class ODTStyleGraphicProperties extends ODTProperties {
   }
 }
 
-class ODTStyle extends OOElement {
+class ODStyle extends ODElement {
   private $style_family;
   public $properties;
   function __construct($style_name, $parent_style = "Standard", $style_family = "text") {
@@ -101,18 +101,18 @@ class ODTStyle extends OOElement {
     // $this->properties = "<style:text-properties fo:font-size=\"11.00pt\" fo:font-weight=\"bold\" fo:font-family=\"Arial\" style:font-family-asian=\"Arial\" style:font-family-complex=\"Arial\" fo:background-color=\"transparent\" style:use-window-font-color=\"true\" />";
     switch ($style_family) {
       case "paragraph":
-        $this->add(new ODTStyleParagraphProperties());
+        $this->add(new ODStyleParagraphProperties());
       case "text":
-        $this->add(new ODTStyleTextProperties());
+        $this->add(new ODStyleTextProperties());
         break;
       case "table-cell":
-        $this->add(new ODTStyleCellProperties());
+        $this->add(new ODStyleCellProperties());
         break;
       case "table-column":
-        $this->add(new ODTStyleColumnProperties());
+        $this->add(new ODStyleColumnProperties());
         break;
       case "graphic": // style:parent-style-name="Graphics"
-        $this->add(new ODTStyleGraphicProperties());
+        $this->add(new ODStyleGraphicProperties());
         break;
       }
   }

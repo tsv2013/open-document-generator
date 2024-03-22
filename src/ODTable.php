@@ -1,8 +1,8 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
-class ODTTable extends OOElement {
+class ODTable extends ODElement {
   private static $next_unique_id = 1;
   private $unique_id;
   public $columns = [];
@@ -10,7 +10,7 @@ class ODTTable extends OOElement {
   public $col_count;
   function __construct($column_defs = 1) {
     parent::__construct("table", "table");
-    $this->unique_id = ODTTable::$next_unique_id++;
+    $this->unique_id = ODTable::$next_unique_id++;
 
     $this->style_name = "Table$this->unique_id";
     $table_width = 17;
@@ -20,7 +20,7 @@ class ODTTable extends OOElement {
     $this->col_count = is_array($column_defs) ? count($column_defs) : $column_defs;
     for ($i = 0; $i < $this->col_count; $i++) {
       $column_style = $this->create_style($column_style_name.$i, "table-column");
-      $column = new ODTTableColumn($column_style);
+      $column = new ODTableColumn($column_style);
       $column_width = is_array($column_defs) ? $column_defs[$i] : round($table_width / $column_defs, 3);
       $column_style->get_style_properties()->set_width($column_width);
       array_push($this->columns, $column);
@@ -29,12 +29,12 @@ class ODTTable extends OOElement {
     $this->attributes = "table:name=\"Sheet$this->unique_id\" table:style-name=\"$this->style_name\"";
   }
   function create_header_row() {
-    $row = new ODTTableRow();
+    $row = new ODTableRow();
     array_push($this->header_rows, $row);
     return $row;
   }
   function create_row() {
-    $row = new ODTTableRow();
+    $row = new ODTableRow();
     array_push($this->content, $row);
     return $row;
   }
@@ -53,7 +53,7 @@ class ODTTable extends OOElement {
   }
 }
 
-class ODTTableColumn extends OOElement {
+class ODTableColumn extends ODElement {
   public $column_style;
   function __construct($column_style, $column_repeated = 1) {
     $this->column_style = $column_style;
@@ -62,13 +62,13 @@ class ODTTableColumn extends OOElement {
   }
 }
 
-class ODTTableRow extends OOElement {
+class ODTableRow extends ODElement {
   function __construct() {
     parent::__construct("table", "table-row");
     $this->attributes = "";
   }
   function create_cell($cell_style, $col_span = null) {
-    $cell = new ODTTableCell($cell_style, $col_span);
+    $cell = new ODTableCell($cell_style, $col_span);
     array_push($this->content, $cell);
     return $cell;
   }
@@ -79,7 +79,7 @@ class ODTTableRow extends OOElement {
   }
 }
 
-class ODTTableCell extends OOElement {
+class ODTableCell extends ODElement {
   function __construct($style_name = "TableCell", $col_span = null) {
     parent::__construct("table", "table-cell", $style_name);
     $this->attributes = "table:style-name=\"$style_name\"";

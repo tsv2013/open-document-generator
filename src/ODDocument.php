@@ -1,9 +1,9 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
-class OODocument extends OOElement {
-  public OOManifest $manifest;
+class ODDocument extends ODElement {
+  public ODManifest $manifest;
   public $mimetype = "application/vnd.oasis.opendocument";
   function __construct() {
     parent::__construct("office", "document-content");
@@ -37,7 +37,7 @@ class OODocument extends OOElement {
                           xmlns:tableooo=\"http://openoffice.org/2009/table\"
                           xmlns:textooo=\"http://openoffice.org/2013/office\"
                           xmlns:field=\"urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0\" office:version=\"1.2\"";
-    $this->manifest = new OOManifest();
+    $this->manifest = new ODManifest();
     $this->create_style("TableCell", "table-cell");
   }
   public function get_head() {

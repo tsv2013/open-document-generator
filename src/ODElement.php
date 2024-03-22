@@ -1,8 +1,8 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
-class OOElement {
+class ODElement {
   protected $namespace = "";
   protected $name = "";
   protected $attributes = "";
@@ -60,7 +60,7 @@ class OOElement {
     return implode("\n", iterator_to_array($this->create(), false));
   }
   public function create_style($style_name, $style_family = "text", $parent_style = "Standard", $properties = "") {
-    $style = new ODTStyle($style_name, $parent_style, $style_family);
+    $style = new ODStyle($style_name, $parent_style, $style_family);
     if(strlen($properties) > 0) {
       $style->properties = $properties;
     }
@@ -89,7 +89,7 @@ class OOElement {
     foreach ($tags as $tag) {
       $index = count($elements);
       if ($tag['type'] == "complete" || $tag['type'] == "open") {
-        $elements[$index] = $index == 0 ? $this : new OOElement;
+        $elements[$index] = $index == 0 ? $this : new ODElement;
         $tag_pieces = explode(":", $tag['tag']);
         $elements[$index]->namespace = $tag_pieces[0];
         $elements[$index]->name = $tag_pieces[1];

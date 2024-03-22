@@ -1,8 +1,8 @@
 <?php
 
-namespace OpenOfficeGenerator;
+namespace OpenDocumentGenerator;
 
-class ODTDrawFrame extends OOElement {
+class ODTDrawFrame extends ODElement {
   private static $next_unique_id = 1;
   private $unique_id;
   private $image;
