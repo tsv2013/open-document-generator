@@ -94,7 +94,7 @@ class ODStyleGraphicProperties extends ODProperties {
 class ODStyle extends ODElement {
   private $style_family;
   public $properties;
-  function __construct($style_name, $parent_style = "Standard", $style_family = "text") {
+  function __construct($style_name, $style_family = "text", $parent_style = "Standard") {
     parent::__construct("style", "style", $style_name);
     $this->style_family = $style_family;
     $this->attributes = "style:name=\"$style_name\" style:family=\"$style_family\" style:parent-style-name=\"$parent_style\"";

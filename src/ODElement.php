@@ -23,7 +23,7 @@ class ODElement {
   }
   protected function update_attributes() {
   }
-  protected function build_attributes() {
+  protected function get_attributes() {
     $this->update_attributes();
     if(is_string($this->attributes)) {
       return $this->attributes;
@@ -41,7 +41,7 @@ class ODElement {
   }
   public function get_head() {
     $closing_content = $this->self_closing ? "/" : "";
-    yield "<{$this->namespace}:{$this->name} {$this->build_attributes()} {$closing_content}>";
+    yield "<{$this->namespace}:{$this->name} {$this->get_attributes()} {$closing_content}>";
   }
   public function get_tail() {
     yield "</{$this->namespace}:{$this->name}>";
@@ -60,7 +60,7 @@ class ODElement {
     return implode("\n", iterator_to_array($this->create(), false));
   }
   public function create_style($style_name, $style_family = "text", $parent_style = "Standard", $properties = "") {
-    $style = new ODStyle($style_name, $parent_style, $style_family);
+    $style = new ODStyle($style_name, $style_family, $parent_style);
     if(strlen($properties) > 0) {
       $style->properties = $properties;
     }
