@@ -14,7 +14,7 @@ class ODTPara extends ODElement {
     if(count($this->content) > 0) {
       yield from parent::get_content();
     } else {
-      yield $this->text;
+      yield htmlspecialchars($this->text);
     }
   }
 }
