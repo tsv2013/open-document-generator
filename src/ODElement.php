@@ -89,7 +89,7 @@ class ODElement {
     foreach ($tags as $tag) {
       $index = count($elements);
       if ($tag['type'] == "complete" || $tag['type'] == "open") {
-        $elements[$index] = $index == 0 ? $this : new ODElement;
+        $elements[$index] = $tag['level'] == 1 ? $this : new ODElement("", "");
         $tag_pieces = explode(":", $tag['tag']);
         $elements[$index]->namespace = $tag_pieces[0];
         $elements[$index]->name = $tag_pieces[1];

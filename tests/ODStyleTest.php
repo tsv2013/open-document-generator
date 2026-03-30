@@ -20,12 +20,12 @@ class ODStyleTest extends TestCase {
         $this->assertStringEqualsStringIgnoringLineEndings("<style:text-properties  fo:font-size=\"11.00pt\" fo:background-color=\"transparent\" fo:font-family=\"Arial\" style:use-window-font-color=\"true\" />", $style_property->get_xml());
     }
     public function testParseXml() {
-        $this->markTestSkipped('must be revisited');
+        // $this->markTestSkipped('must be revisited');
         $style = new ODStyle("Custom");
         $style->parse_xml("<style:style style:name=\"Custom\" style:family=\"text\" style:parent-style-name=\"Standard\" >
-        <style:text-properties  fo:font-size=\"11.00pt\" fo:background-color=\"transparent\" fo:font-family=\"Arial\" style:use-window-font-color=\"true\" />
+        <style:text-properties fo:font-size=\"11.00pt\" fo:background-color=\"transparent\" fo:font-family=\"Arial\" style:use-window-font-color=\"true\" />
         </style:style>");
-        $this->assertStringEqualsStringIgnoringLineEndings("<style:style style:name=\"Custom\" style:family=\"text\" style:parent-style-name=\"Standard\" >
+        $this->assertStringEqualsStringIgnoringLineEndings("<style:style  style:name=\"Custom\" style:family=\"text\" style:parent-style-name=\"Standard\" >
 <style:text-properties  fo:font-size=\"11.00pt\" fo:background-color=\"transparent\" fo:font-family=\"Arial\" style:use-window-font-color=\"true\" />
 </style:style>", $style->get_xml());
     }
